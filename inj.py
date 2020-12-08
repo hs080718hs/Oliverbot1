@@ -6,6 +6,7 @@
 import discord
 from captcha.image import ImageCaptcha
 import random
+import os
 import time
 
 client = discord.Client()
@@ -13,12 +14,12 @@ client = discord.Client()
 @client.event
 async def on_ready():
     print("인증 봇이 정상적으로 실행되었습니다.")
-    game = discord.Game('빈센아 인증')
+    game = discord.Game('올리버야 인증')
     await client.change_presence(status=discord.Status.online, activity=game)
 
 @client.event
 async def on_message(message):
-    if message.content.startswith("빈센아 인증"): #명령어 빈센아 인증
+    if message.content.startswith("올리버야 인증"): #명령어 올리버야 인증
         a = ""
         Captcha_img = ImageCaptcha()
         for i in range(6):
@@ -62,6 +63,6 @@ async def on_message(message):
             await message.channel.send(embed=tlfvoEmbed)
             print(f'{message.author} 님이 잘못된 숫자로 인해 인증을 실패함.')
 
-client.run('NzgxODcwMTE3NDQwMTkyNTQz.X8D7Sg.do7AesygDJGI970HZ2DFp2K_dPU')
+client.run(os.environ['token'])
 
 
